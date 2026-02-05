@@ -37,8 +37,8 @@ This guide provides a concise but useful reference for daily Git operations. It 
 
 ## Prerequisites
 
-* Install Git [https://git-scm.com/downloads](https://git-scm.com/downloads)
-* Configure your user (one time):
+- Install Git [https://git-scm.com/downloads](https://git-scm.com/downloads)
+- Configure your user (one time):
 
 ```bash
 git config --global user.name "Your Name"
@@ -63,8 +63,8 @@ git clone <repository-url>
 
 Common clone flags:
 
-* `--branch <name>` clone a specific branch
-* `--depth <n>` shallow clone for speed
+- `--branch <name>` clone a specific branch
+- `--depth <n>` shallow clone for speed
 
 Example:
 
@@ -84,8 +84,8 @@ git status
 
 Flags:
 
-* `-s` short format
-* `-b` show branch info (helpful in scripts)
+- `-s` short format
+- `-b` show branch info (helpful in scripts)
 
 ---
 
@@ -101,8 +101,8 @@ git add -p            # interactive patch
 
 Useful flags:
 
-* `-p` (patch mode to select hunks)
-* `-A` stage all tracked + untracked
+- `-p` (patch mode to select hunks)
+- `-A` stage all tracked + untracked
 
 ### Commit Changes
 
@@ -112,8 +112,8 @@ git commit -m "Message"
 
 Common flags:
 
-* `-a` auto-stage tracked files (skip `add`)
-* `--amend` modify last commit
+- `-a` auto-stage tracked files (skip `add`)
+- `--amend` modify last commit
 
 Example:
 
@@ -148,7 +148,7 @@ git pull
 
 Flags:
 
-* `--rebase` applies local commits after remote ones (cleaner history)
+- `--rebase` applies local commits after remote ones (cleaner history)
 
 Recommended:
 
@@ -190,11 +190,11 @@ git log
 
 Useful flags:
 
-* `--oneline` compact format
-* `--graph` ascii branch graph
-* `--decorate` show refs
-* `--author=<name>` filter
-* `--since=<date>` filter by recency
+- `--oneline` compact format
+- `--graph` ascii branch graph
+- `--decorate` show refs
+- `--author=<name>` filter
+- `--since=<date>` filter by recency
 
 Example:
 
@@ -224,9 +224,9 @@ git diff <commit1> <commit2>
 
 Useful flags:
 
-* `--name-only` just filenames
-* `--stat` summary by file
-* `--color-words` compact wording diff
+- `--name-only` just filenames
+- `--stat` summary by file
+- `--color-words` compact wording diff
 
 ### Show
 
@@ -238,8 +238,8 @@ git show <commit>
 
 Flags:
 
-* `--stat` summary
-* `--name-only` file names only
+- `--stat` summary
+- `--name-only` file names only
 
 Example:
 
@@ -297,11 +297,11 @@ git stash
 
 Useful flags:
 
-* `git stash push -m "message"` name the stash
-* `git stash list` list stashes
-* `git stash show -p` view patch
-* `git stash apply` apply (keep stash)
-* `git stash pop` apply and remove
+- `git stash push -m "message"` name the stash
+- `git stash list` list stashes
+- `git stash show -p` view patch
+- `git stash apply` apply (keep stash)
+- `git stash pop` apply and remove
 
 ### Reset
 
@@ -309,9 +309,9 @@ Moves HEAD pointer and optionally modifies working files.
 
 Modes:
 
-* `--soft` keep staged + working changes
-* `--mixed` (default) keep working, unstage
-* `--hard` discard everything (danger)
+- `--soft` keep staged + working changes
+- `--mixed` (default) keep working, unstage
+- `--hard` discard everything (danger)
 
 Examples:
 
@@ -322,8 +322,8 @@ git reset --hard HEAD~1
 
 Useful flags:
 
-* `--merge` attempt safe reset during merges
-* `--keep` keep local changes when possible
+- `--merge` attempt safe reset during merges
+- `--keep` keep local changes when possible
 
 ### Revert
 
@@ -335,8 +335,8 @@ git revert <commit>
 
 Flags:
 
-* `--no-edit` skip editor
-* `--no-commit` stage changes only
+- `--no-edit` skip editor
+- `--no-commit` stage changes only
 
 Example:
 
@@ -392,24 +392,24 @@ git config --global init.defaultBranch main
 
 ## Common Tips
 
-* Prefer `rebase` for linear history
-* Use `stash` for interrupted work
-* Use `revert` for undoing public commits
-* Use `reset` only in your own local history
-* Use `--force-with-lease` instead of `--force`
+- Prefer `rebase` for linear history
+- Use `stash` for interrupted work
+- Use `revert` for undoing public commits
+- Use `reset` only in your own local history
+- Use `--force-with-lease` instead of `--force`
 
 ---
 
 ## Forward Thinking
 
-* Modern Git favors `switch` and `restore` for clarity
-* `git worktree` allows multiple branch checkouts at once
-* `git sparse-checkout` optimizes huge monorepos
-* Future workflows increasingly rely on signed commits (GPG/SSH signing)
+- Modern Git favors `switch` and `restore` for clarity
+- `git worktree` allows multiple branch checkouts at once
+- `git sparse-checkout` optimizes huge monorepos
+- Future workflows increasingly rely on signed commits (GPG/SSH signing)
 
 ---
 
 ## References
 
-* Git Official Docs [https://git-scm.com/doc](https://git-scm.com/doc)
-* Pro Git Book [https://git-scm.com/book/en/v2](https://git-scm.com/book/en/v2)
+- Git Official Docs [https://git-scm.com/doc](https://git-scm.com/doc)
+- Pro Git Book [https://git-scm.com/book/en/v2](https://git-scm.com/book/en/v2)
