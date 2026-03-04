@@ -13,14 +13,15 @@ on:
 
 env:
   IMAGE_NAME: bulletin-board-app
-  REGISTRY: docker.io
+  # Subdirectory where the Vue app lives
+  APP_DIR: bulletin-board-app
 
 jobs:
   build-test-deploy:
     name: Build, Test & Deploy
     runs-on: ubuntu-latest
 
-    # Only run the full job on push OR on a merged PR (not just any closed PR)
+    # Only run on push OR on a merged PR (not just any closed PR)
     if: github.event_name == 'push' || github.event.pull_request.merged == true
 
     steps:
@@ -34,21 +35,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          # Point cache to the subdirectory's package-lock.json
           cache: "npm"
+          cache-dependency-path: ${{ env.APP_DIR }}/package-lock.json
 
       # ── Install dependencies ─────────────────────────────────────────────────
-      # 3. Install dependencies
+      # 3. Install dependencies — run inside the app subdirectory
       - name: Install dependencies
-        run: npm run install
+        working-directory: ${{ env.APP_DIR }}
+        run: npm install
 
       # ── Tests ────────────────────────────────────────────────────────────────
-      # 4. Run tests
+      # 4. Run tests — --watchAll=false prevents Jest from hanging in CI
       - name: Run tests
-        run: npm run test
+        working-directory: ${{ env.APP_DIR }}
+        run: npm run test -- --watchAll=false
 
       # 5. Run test coverage
       - name: Run test coverage
-        run: npm run test:coverage
+        working-directory: ${{ env.APP_DIR }}
+        run: npm run test:coverage -- --watchAll=false
 
       # ── Docker: Login ────────────────────────────────────────────────────────
       # 6. Authenticate to Docker Hub
@@ -66,12 +72,12 @@ jobs:
           images: ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
 
       # ── Docker: Build & Push ─────────────────────────────────────────────────
-      # 6. Build and push Docker image to Docker Hub
+      # Build context and Dockerfile both point into the subdirectory
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./${{ env.APP_DIR }}
+          file: ./${{ env.APP_DIR }}/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
