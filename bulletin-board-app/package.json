@@ -5,6 +5,11 @@
   "main": "server.js",
   "author": "Ryan Chenkie, Jason Lam",
   "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
   "dependencies": {
     "bootstrap": "^3.3.6",
     "ejs": "^2.3.4",
@@ -16,10 +21,9 @@
   "devDependencies": {
     "body-parser": "^1.14.1",
     "errorhandler": "^1.4.2",
+    "jest": "^30.2.0",
     "method-override": "^2.3.5",
-    "morgan": "^1.6.1"
-  },
-  "scripts": {
-    "start": "node server.js"
+    "morgan": "^1.6.1",
+    "supertest": "^7.2.2"
   }
 }
