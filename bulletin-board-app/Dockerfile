@@ -2,10 +2,10 @@ FROM node:20-alpine
 
 WORKDIR /usr/src/app
 
-# Copy only dependency manifests first (cache layer)
+# Copy only dependency manifests first (better layer caching)
 COPY package*.json ./
 
-# Deterministic install
+# Deterministic, CI-safe install
 RUN npm ci
 
 # Copy remaining source
