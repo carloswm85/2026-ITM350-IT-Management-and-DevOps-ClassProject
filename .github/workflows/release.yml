@@ -26,7 +26,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@w11-iac-with-terraform
+        uses: actions/checkout@v4
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
