@@ -1,16 +1,20 @@
-provider "aws" {
-  region = "us-west-1"
-}
-
-data "aws_ssm_parameter" "amazon_linux" {
-  name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
-}
-
-resource "aws_instance" "example" {
-  ami           = data.aws_ssm_parameter.amazon_linux.value
-  instance_type = "t2.micro"
-
-  tags = {
-    Name = "terraform-created-instance"
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
   }
+}
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_s3_bucket" "example_bucket" {
+  bucket = "rmiller-terraform-demo-bucket-${random_id.rand.hex}"
+}
+
+resource "random_id" "rand" {
+  byte_length = 4
 }

@@ -1,4 +1,4 @@
-name: Terraform Release Pipeline
+name: Terraform Release
 
 on:
   workflow_dispatch:
@@ -12,44 +12,35 @@ on:
       aws_session_token:
         description: 'AWS Session Token'
         required: true
-      aws_region:
-        description: 'AWS Region'
-        required: true
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./iac
-
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ github.event.inputs.aws_access_key_id }}
-          aws-secret-access-key: ${{ github.event.inputs.aws_secret_access_key }}
-          aws-session-token: ${{ github.event.inputs.aws_session_token }}
-          aws-region: ${{ github.event.inputs.aws_region }}
-
-      - name: Terraform Format
-        run: terraform fmt -check
-
+      - name: Set AWS credentials
+        run: |
+          echo "AWS_ACCESS_KEY_ID=${{ github.event.inputs.aws_access_key_id }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ github.event.inputs.aws_secret_access_key }}" >> $GITHUB_ENV
+          echo "AWS_SESSION_TOKEN=${{ github.event.inputs.aws_session_token }}" >> $GITHUB_ENV
+      - name: Install Terraform
+        run: |
+          TERRAFORM_VERSION=1.6.0
+          curl -Lo terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+          unzip terraform.zip
+          sudo mv terraform /usr/local/bin/
+          terraform version
       - name: Terraform Init
+        working-directory: ./iac
         run: terraform init
 
-      - name: Terraform Validate
-        run: terraform validate
-
       - name: Terraform Plan
+        working-directory: ./iac
         run: terraform plan
 
       - name: Terraform Apply
+        working-directory: ./iac
         run: terraform apply --auto-approve
