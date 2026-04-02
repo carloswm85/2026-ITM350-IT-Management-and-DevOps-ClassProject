@@ -1,0 +1,24 @@
+# ===================== TERRAFORM =====================
+*.tf     linguist-language=HCL
+*.hcl    linguist-language=HCL
+*.tf     linguist-detectable=true
+
+# ===================== GITHUB ACTIONS =====================
+.github/workflows/*.yml linguist-language=YAML
+.github/workflows/*.yaml linguist-language=YAML
+
+# ===================== DOCKER =====================
+Dockerfile linguist-language=Dockerfile
+docker-compose.yml linguist-language=YAML
+docker-compose.*.yml linguist-language=YAML
+
+# ===================== YAML (GENERAL) =====================
+*.yml    linguist-language=YAML
+*.yaml   linguist-language=YAML
+
+# ===================== ENSURE INCLUDED =====================
+*.yml linguist-detectable=true
+*.tf  linguist-detectable=true
+
+# ===================== LINE ENDINGS =====================
+* text=auto
