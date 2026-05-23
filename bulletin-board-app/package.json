@@ -13,13 +13,13 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "ejs": "^2.3.4",
-    "express": "^4.13.3",
+    "express": "^4.22.2",
     "morgan": "^1.6.1",
     "vue": "^1.0.10",
     "vue-resource": "^0.1.17"
   },
   "devDependencies": {
-    "body-parser": "^1.14.1",
+    "body-parser": "^1.20.5",
     "errorhandler": "^1.4.2",
     "jest": "^30.2.0",
     "method-override": "^2.3.5",
